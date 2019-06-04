@@ -23,6 +23,7 @@ class CameraViewControllerPresenter {
     func photoOutput(imageData: Data) {
         viewControllerModel.request(imageData: imageData) { result in
             DispatchQueue.main.async {
+                // FIXME: 遷移時にカメラ画面が表示されるので、消すタイミング要修正
                 self.delegate?.hideLoadingScene()
                 guard result == "null" else {
                     self.delegate?.prepare(result: result)

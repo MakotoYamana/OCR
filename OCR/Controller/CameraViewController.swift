@@ -19,6 +19,8 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     var photoOutput: AVCapturePhotoOutput?
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
+    override var prefersStatusBarHidden: Bool { return true }
+    
     @IBOutlet var takePhotoButton: UIButton!
     @IBOutlet var screenshotImageView: UIImageView!
     
@@ -45,6 +47,10 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
         settings.flashMode = .auto
         settings.isAutoStillImageStabilizationEnabled = true
         photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
+    }
+    
+    @IBAction func tapCloseButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     /// カメラ画質の設定
@@ -85,7 +91,7 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
         guard let cameraPreviewLayer = cameraPreviewLayer else { return }
         cameraPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         cameraPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-        cameraPreviewLayer.frame = screenshotImageView.frame
+        cameraPreviewLayer.frame = self.view.frame
         self.view.layer.insertSublayer(cameraPreviewLayer, at: 0)
     }
     
@@ -93,7 +99,6 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
         self.startAnimating(message: "文字認識中...", type: .pacman)
         screenshotImageView.image = UIImage(data: imageData)
         screenshotImageView.isHidden = false
-        self.view.bringSubviewToFront(takePhotoButton)
     }
     
 }

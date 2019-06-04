@@ -48,10 +48,8 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
 extension ResultViewController: ResultViewControllerDelegate {
     
     func closeResultView() {
-        if let navigationController = self.presentingViewController as? UINavigationController {
-            navigationController.popViewController(animated: true)
-        }
-        self.dismiss(animated: true, completion: nil)
+        // FIXME: カメラ画面が一瞬ちらつく
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     func showAlert() {
