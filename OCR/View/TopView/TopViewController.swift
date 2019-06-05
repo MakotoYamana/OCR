@@ -25,6 +25,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         topViewControllerPresenter.viewWillAppear()
     }
     
