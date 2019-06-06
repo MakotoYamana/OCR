@@ -21,9 +21,7 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         resultViewControllerPresenter.delegate = self
         titleTextField.delegate = self
-        DispatchQueue.main.async {
-            self.detailTextView.text = self.resultText
-        }
+        self.detailTextView.text = self.resultText
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
