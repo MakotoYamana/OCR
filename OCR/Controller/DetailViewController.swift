@@ -40,7 +40,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-extension DetailViewController: DetailViewControllerDelegate {
+extension DetailViewController: DetailViewPresenterDelegate {
     
     func closeDetailView() {
         self.navigationController?.popViewController(animated: true)

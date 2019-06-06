@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ResultViewControllerDelegate: class {
+protocol ResultViewPresenterDelegate: class {
     func closeResultView()
     func showAlert()
 }
@@ -17,7 +17,7 @@ class ResultViewControllerPresenter {
     
     private let viewControllerModel = ViewControllerModel()
     
-    weak var delegate: ResultViewControllerDelegate?
+    weak var delegate: ResultViewPresenterDelegate?
     
     func tapSaveButton(titleText: String?, resultText: String) {
         guard let titleText = titleText else { return }

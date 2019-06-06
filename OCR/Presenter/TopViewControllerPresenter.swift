@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TopViewControllerDelegate: class {
+protocol TopViewPresenterDelegate: class {
     func reload()
 }
 
@@ -17,9 +17,9 @@ class TopViewControllerPresenter {
     private let viewControllerModel = ViewControllerModel()
 
     var items: [Item] = []
-    weak var delegate: TopViewControllerDelegate?
+    weak var delegate: TopViewPresenterDelegate?
     
-    func viewDidLoad(delegate: TopViewControllerDelegate?) {
+    func viewDidLoad(delegate: TopViewPresenterDelegate?) {
         self.delegate = delegate
     }
     

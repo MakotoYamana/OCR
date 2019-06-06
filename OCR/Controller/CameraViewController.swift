@@ -108,7 +108,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
     
 }
 
-extension CameraViewController: CameraViewControllerDelegate {
+extension CameraViewController: CameraViewPresenterDelegate {
     
     func hideLoadingScene() {
         self.stopAnimating()

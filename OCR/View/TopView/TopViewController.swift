@@ -63,7 +63,7 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
 }
 
-extension TopViewController: TopViewControllerDelegate {
+extension TopViewController: TopViewPresenterDelegate {
     
     func reload() {
         DispatchQueue.main.async {

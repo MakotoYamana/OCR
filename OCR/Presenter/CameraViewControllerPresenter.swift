@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CameraViewControllerDelegate: class {
+protocol CameraViewPresenterDelegate: class {
     func hideLoadingScene()
     func prepare(result: String)
     func showAlert()
@@ -18,7 +18,7 @@ class CameraViewControllerPresenter {
     
     private let viewControllerModel = ViewControllerModel()
     
-    weak var delegate: CameraViewControllerDelegate?
+    weak var delegate: CameraViewPresenterDelegate?
     
     func photoOutput(imageData: Data) {
         viewControllerModel.request(imageData: imageData) { result in

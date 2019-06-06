@@ -43,7 +43,7 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-extension ResultViewController: ResultViewControllerDelegate {
+extension ResultViewController: ResultViewPresenterDelegate {
     
     func closeResultView() {
         if let navigationController = self.presentingViewController as? UINavigationController {

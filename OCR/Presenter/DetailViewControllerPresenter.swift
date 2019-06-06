@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DetailViewControllerDelegate: class {
+protocol DetailViewPresenterDelegate: class {
     func closeDetailView()
     func showAlert()
 }
@@ -17,7 +17,7 @@ class DetailViewControllerPresenter {
     
     var viewControllerModel: ViewControllerModel?
     
-    weak var delegate: DetailViewControllerDelegate?
+    weak var delegate: DetailViewPresenterDelegate?
     
     func setModel(model: ViewControllerModel) {
         viewControllerModel = model
