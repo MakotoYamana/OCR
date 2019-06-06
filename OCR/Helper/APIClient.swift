@@ -1,5 +1,5 @@
 //
-//  ApiClient.swift
+//  APIClient.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/03.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ApiClient {
+class APIClient {
     
     static func request(imageDataString: String, completionHandler: @escaping (Result<Data, Error>) -> ()) {
         let config = URLSessionConfiguration.default

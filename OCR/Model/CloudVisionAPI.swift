@@ -1,5 +1,5 @@
 //
-//  CloudVisionApi.swift
+//  CloudVisionAPI.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/03.
@@ -8,10 +8,10 @@
 
 import SwiftyJSON
 
-class CloudVisionApi {
+class CloudVisionAPI {
     
-    func requestApi(imageDataString: String, completionHandler: @escaping (String) -> ()) {
-        ApiClient.request(imageDataString: imageDataString) { result in
+    func requestAPI(imageDataString: String, completionHandler: @escaping (String) -> ()) {
+        APIClient.request(imageDataString: imageDataString) { result in
             switch result {
             case .success(let data):
                 do {

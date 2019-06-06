@@ -22,8 +22,8 @@
 		30CB5DE6227B5B5300144183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30CB5DE5227B5B5300144183 /* Assets.xcassets */; };
 		30CB5DE9227B5B5300144183 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CB5DE7227B5B5300144183 /* LaunchScreen.storyboard */; };
 		30CB5DF2227B5E2800144183 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF1227B5E2800144183 /* CameraViewController.swift */; };
-		30CB5DF6227B692C00144183 /* CloudVisionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF5227B692C00144183 /* CloudVisionApi.swift */; };
-		30CB5DF8227B694600144183 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF7227B694600144183 /* ApiClient.swift */; };
+		30CB5DF6227B692C00144183 /* CloudVisionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF5227B692C00144183 /* CloudVisionAPI.swift */; };
+		30CB5DF8227B694600144183 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF7227B694600144183 /* APIClient.swift */; };
 		30CB5DFA227B696700144183 /* UrlRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF9227B696700144183 /* UrlRequester.swift */; };
 		30F23A5B229591C00068F3C8 /* ViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F23A5A229591C00068F3C8 /* ViewControllerModel.swift */; };
 		30F823AF229978A900AE4B65 /* TopViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F823AE229978A900AE4B65 /* TopViewControllerPresenter.swift */; };
@@ -50,8 +50,8 @@
 		30CB5DE8227B5B5300144183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30CB5DEA227B5B5300144183 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		30CB5DF1227B5E2800144183 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = ../Controller/CameraViewController.swift; sourceTree = "<group>"; };
-		30CB5DF5227B692C00144183 /* CloudVisionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudVisionApi.swift; sourceTree = "<group>"; };
-		30CB5DF7227B694600144183 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		30CB5DF5227B692C00144183 /* CloudVisionAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudVisionAPI.swift; sourceTree = "<group>"; };
+		30CB5DF7227B694600144183 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		30CB5DF9227B696700144183 /* UrlRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlRequester.swift; sourceTree = "<group>"; };
 		30F23A5A229591C00068F3C8 /* ViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerModel.swift; sourceTree = "<group>"; };
 		30F823AE229978A900AE4B65 /* TopViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewControllerPresenter.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		30CB5DF4227B66C400144183 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				30CB5DF5227B692C00144183 /* CloudVisionApi.swift */,
+				30CB5DF5227B692C00144183 /* CloudVisionAPI.swift */,
 				304C7420228B16FD00FFABA0 /* CoreDataManager.swift */,
 				30F23A5A229591C00068F3C8 /* ViewControllerModel.swift */,
 			);
@@ -126,7 +126,7 @@
 		30E3CCC4227CBD5D0096E636 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				30CB5DF7227B694600144183 /* ApiClient.swift */,
+				30CB5DF7227B694600144183 /* APIClient.swift */,
 				30CB5DF9227B696700144183 /* UrlRequester.swift */,
 			);
 			path = Helper;
@@ -309,9 +309,9 @@
 				30CB5DDC227B5B5200144183 /* AppDelegate.swift in Sources */,
 				30F23A5B229591C00068F3C8 /* ViewControllerModel.swift in Sources */,
 				30970C06229987340040C418 /* ResultViewControllerPresenter.swift in Sources */,
-				30CB5DF6227B692C00144183 /* CloudVisionApi.swift in Sources */,
+				30CB5DF6227B692C00144183 /* CloudVisionAPI.swift in Sources */,
 				304C7421228B16FD00FFABA0 /* CoreDataManager.swift in Sources */,
-				30CB5DF8227B694600144183 /* ApiClient.swift in Sources */,
+				30CB5DF8227B694600144183 /* APIClient.swift in Sources */,
 				30347AE62299DE6100F07BED /* CameraViewControllerPresenter.swift in Sources */,
 				30970C082299D2100040C418 /* DetailViewControllerPresenter.swift in Sources */,
 			);

@@ -11,8 +11,8 @@ import Keys
 
 class UrlRequester {
     
-    static let cloudVisionApiKey = OCRKeys().cloudVisionApiKey
-    static let googleUrlString = "https://vision.googleapis.com/v1/images:annotate?key=\(cloudVisionApiKey)"
+    static let cloudVisionAPIKey = OCRKeys().cloudVisionAPIKey
+    static let googleUrlString = "https://vision.googleapis.com/v1/images:annotate?key=\(cloudVisionAPIKey)"
     
     static func create(jsonRequest: [String: [String: Any]]) -> URLRequest {
         guard let url = URL(string: self.googleUrlString) else { fatalError("URLが無効") }

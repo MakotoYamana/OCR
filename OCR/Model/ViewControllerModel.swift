@@ -11,7 +11,7 @@ import Foundation
 class ViewControllerModel {
     
     private let coreDataManager = CoreDataManager()
-    private let cloudVisionApi = CloudVisionApi()
+    private let cloudVisionAPI = CloudVisionAPI()
     
     func get() -> [Item] {
         return coreDataManager.getData()
@@ -30,7 +30,7 @@ class ViewControllerModel {
     }
     
     func request(imageData: Data, completionHandler: @escaping (String) -> ()) {
-        cloudVisionApi.requestApi(imageDataString: imageData.base64EncodedString()) { result in
+        cloudVisionAPI.requestAPI(imageDataString: imageData.base64EncodedString()) { result in
             completionHandler(result)
         }
     }
