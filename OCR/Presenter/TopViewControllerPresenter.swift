@@ -28,7 +28,11 @@ class TopViewControllerPresenter {
     }
     
     private func getItems() {
-        items = viewControllerModel.get()
+        items = viewControllerModel.get().sorted {
+            guard let lhsDate = $0.date,
+                let rhsDate = $1.date else { return false }
+            return lhsDate < rhsDate
+        }
         delegate?.reload()
     }
     
