@@ -13,11 +13,7 @@ import NVActivityIndicatorView
 class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
     private let cameraViewControllerPresenter = CameraViewControllerPresenter()
-    
-    let captureSession = AVCaptureSession()
-    var captureDevice: AVCaptureDevice?
-    var photoOutput: AVCapturePhotoOutput?
-    var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
+    private let cameraViewSetting = CameraViewSetting()
     
     @IBOutlet var takePhotoButton: UIButton!
     @IBOutlet var screenshotImageView: UIImageView!
@@ -25,11 +21,9 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraViewControllerPresenter.delegate = self
-        setupCaptureSession()
-        setupDevice()
-        setupInputAndOutput()
-        setupPreviewLayer()
-        captureSession.startRunning()
+        cameraViewSetting.setup()
+        guard let cameraPreviewLayer = cameraViewSetting.generateCameraPreviewLayer(frame: screenshotImageView.frame) else { return }
+        self.view.layer.insertSublayer(cameraPreviewLayer, at: 0)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,52 +35,7 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBAction func tapTakePhotoButton(_ sender: Any) {
         takePhotoButton.isEnabled = false
-        let settings = AVCapturePhotoSettings()
-        settings.flashMode = .auto
-        settings.isAutoStillImageStabilizationEnabled = true
-        photoOutput?.capturePhoto(with: settings, delegate: self as AVCapturePhotoCaptureDelegate)
-    }
-    
-    /// カメラ画質の設定
-    private func setupCaptureSession() {
-        captureSession.sessionPreset = AVCaptureSession.Preset.photo
-    }
-    
-    /// デバイスの設定
-    private func setupDevice() {
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.unspecified)
-        let devices = deviceDiscoverySession.devices
-        
-        for device in devices {
-            if device.position == AVCaptureDevice.Position.back {
-                captureDevice = device
-            }
-        }
-    }
-    
-    /// 入出力データの設定
-    private func setupInputAndOutput() {
-        guard let captureDevice = captureDevice else { return }
-        do {
-            let captureDeviceInput = try AVCaptureDeviceInput(device: captureDevice)
-            captureSession.addInput(captureDeviceInput)
-            photoOutput = AVCapturePhotoOutput()
-            guard let photoOutput = photoOutput else { return }
-            photoOutput.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])], completionHandler: nil)
-            captureSession.addOutput(photoOutput)
-        } catch {
-            print(error)
-        }
-    }
-    
-    /// カメラプレビュー表示の設定
-    private func setupPreviewLayer() {
-        cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        guard let cameraPreviewLayer = cameraPreviewLayer else { return }
-        cameraPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
-        cameraPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
-        cameraPreviewLayer.frame = screenshotImageView.frame
-        self.view.layer.insertSublayer(cameraPreviewLayer, at: 0)
+        cameraViewSetting.settingPhotoOutput(delegate: self as AVCapturePhotoCaptureDelegate)
     }
     
     private func showLoadingScene(imageData: Data) {

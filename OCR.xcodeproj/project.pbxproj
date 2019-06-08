@@ -15,6 +15,7 @@
 		30970C06229987340040C418 /* ResultViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30970C05229987340040C418 /* ResultViewControllerPresenter.swift */; };
 		30970C082299D2100040C418 /* DetailViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30970C072299D2100040C418 /* DetailViewControllerPresenter.swift */; };
 		30B0539F227F923100A86A43 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B0539E227F923100A86A43 /* DetailViewController.swift */; };
+		30C87F9022ABF3FD008CEF44 /* CameraViewSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F8F22ABF3FD008CEF44 /* CameraViewSetting.swift */; };
 		30CB5DDC227B5B5200144183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DDB227B5B5200144183 /* AppDelegate.swift */; };
 		30CB5DDE227B5B5200144183 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DDD227B5B5200144183 /* TopViewController.swift */; };
 		30CB5DE1227B5B5200144183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CB5DDF227B5B5200144183 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		30970C05229987340040C418 /* ResultViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewControllerPresenter.swift; sourceTree = "<group>"; };
 		30970C072299D2100040C418 /* DetailViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewControllerPresenter.swift; sourceTree = "<group>"; };
 		30B0539E227F923100A86A43 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = ../Controller/DetailViewController.swift; sourceTree = "<group>"; };
+		30C87F8F22ABF3FD008CEF44 /* CameraViewSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CameraViewSetting.swift; path = ../Other/CameraViewSetting.swift; sourceTree = "<group>"; };
 		30CB5DD8227B5B5200144183 /* OCR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CB5DDB227B5B5200144183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30CB5DDD227B5B5200144183 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TopViewController.swift; path = TopView/TopViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				30CB5DF7227B694600144183 /* APIClient.swift */,
+				30C87F8F22ABF3FD008CEF44 /* CameraViewSetting.swift */,
 				30CB5DF9227B696700144183 /* UrlRequester.swift */,
 			);
 			path = Helper;
@@ -310,6 +313,7 @@
 				30F23A5B229591C00068F3C8 /* ViewControllerModel.swift in Sources */,
 				30970C06229987340040C418 /* ResultViewControllerPresenter.swift in Sources */,
 				30CB5DF6227B692C00144183 /* CloudVisionAPI.swift in Sources */,
+				30C87F9022ABF3FD008CEF44 /* CameraViewSetting.swift in Sources */,
 				304C7421228B16FD00FFABA0 /* CoreDataManager.swift in Sources */,
 				30CB5DF8227B694600144183 /* APIClient.swift in Sources */,
 				30347AE62299DE6100F07BED /* CameraViewControllerPresenter.swift in Sources */,
