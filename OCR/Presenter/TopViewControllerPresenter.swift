@@ -16,11 +16,15 @@ class TopViewControllerPresenter {
     
     private let viewControllerModel = ViewControllerModel()
 
-    var items: [Item] = []
+    var viewItems: [Item] = []
     weak var delegate: TopViewPresenterDelegate?
     
-    func viewDidLoad(delegate: TopViewPresenterDelegate?) {
-        self.delegate = delegate
+    deinit {
+        viewControllerModel.unregister(id: "TopViewPresenter")
+    }
+    
+    func viewDidLoad() {
+        viewControllerModel.register(id: "TopViewPresenter", delegate: self)
     }
     
     func viewWillAppear() {
@@ -28,7 +32,7 @@ class TopViewControllerPresenter {
     }
     
     private func getItems() {
-        items = viewControllerModel.get().sorted {
+        viewItems = viewControllerModel.get().sorted {
             guard let lhsDate = $0.date,
                 let rhsDate = $1.date else { return false }
             return lhsDate < rhsDate
@@ -46,4 +50,15 @@ class TopViewControllerPresenter {
         getItems()
     }
     
+}
+
+extension TopViewControllerPresenter: ViewControllerModelDelegate {
+    
+    func reload(items: [Item]) {
+        self.viewItems = items.sorted {
+            guard let lhsDate = $0.date,
+                let rhsDate = $1.date else { return false }
+            return lhsDate < rhsDate
+        }
+    }
 }

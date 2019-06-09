@@ -16,7 +16,8 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topViewControllerPresenter.viewDidLoad(delegate: self)
+        topViewControllerPresenter.delegate = self
+        topViewControllerPresenter.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "TopTableViewCell", bundle: nil), forCellReuseIdentifier: "TopTableViewCell")
@@ -40,23 +41,23 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return topViewControllerPresenter.items.count
+        return topViewControllerPresenter.viewItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopTableViewCell", for: indexPath) as! TopTableViewCell
-        cell.setItem(topViewControllerPresenter.items[indexPath.row])
+        cell.setItem(topViewControllerPresenter.viewItems[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = topViewControllerPresenter.items[indexPath.row]
+        let selectedItem = topViewControllerPresenter.viewItems[indexPath.row]
         performSegue(withIdentifier: "toDetailViewController", sender: selectedItem)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let deleteItem = topViewControllerPresenter.items[indexPath.row]
+            let deleteItem = topViewControllerPresenter.viewItems[indexPath.row]
             topViewControllerPresenter.swipeDelete(item: deleteItem)
         }
     }

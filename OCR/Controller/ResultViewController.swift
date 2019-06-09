@@ -20,6 +20,7 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         resultViewControllerPresenter.delegate = self
+        resultViewControllerPresenter.viewDidLoad()
         titleTextField.delegate = self
         self.detailTextView.text = self.resultText
     }

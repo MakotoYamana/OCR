@@ -20,6 +20,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailViewControllerPresenter.delegate = self
+        detailViewControllerPresenter.viewDidLoad()
         titleTextField.delegate = self
         titleTextField.text = item?.title
         detailTextView.text = item?.detail

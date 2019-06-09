@@ -8,10 +8,31 @@
 
 import Foundation
 
+protocol ViewControllerModelDelegate {
+    func reload(items: [Item])
+}
+
 class ViewControllerModel {
     
     private let coreDataManager = CoreDataManager()
     private let cloudVisionAPI = CloudVisionAPI()
+    
+    var delegates: [String: ViewControllerModelDelegate] = [:]
+    private var items: [Item] = [] {
+        didSet {
+            delegates.values.forEach { delegate in
+                delegate.reload(items: items)
+            }
+        }
+    }
+    
+    func register(id: String, delegate: ViewControllerModelDelegate) {
+        delegates[id] = delegate
+    }
+    
+    func unregister(id: String) {
+        delegates.removeValue(forKey: id)
+    }
     
     func get() -> [Item] {
         return coreDataManager.getData()

@@ -17,7 +17,16 @@ class DetailViewControllerPresenter {
     
     var viewControllerModel: ViewControllerModel?
     
+    var viewItems: [Item] = []
     weak var delegate: DetailViewPresenterDelegate?
+    
+    deinit {
+        viewControllerModel?.unregister(id: "DetailViewPresenter")
+    }
+    
+    func viewDidLoad() {
+        viewControllerModel?.register(id: "DetailViewPresenter", delegate: self)
+    }
     
     func setModel(model: ViewControllerModel) {
         viewControllerModel = model
@@ -34,4 +43,15 @@ class DetailViewControllerPresenter {
         }
     }
     
+}
+
+extension DetailViewControllerPresenter: ViewControllerModelDelegate {
+    
+    func reload(items: [Item]) {
+        self.viewItems = items.sorted {
+            guard let lhsDate = $0.date,
+                let rhsDate = $1.date else { return false }
+            return lhsDate < rhsDate
+        }
+    }
 }
