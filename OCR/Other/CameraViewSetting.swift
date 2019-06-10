@@ -77,3 +77,13 @@ class CameraViewSetting {
     }
     
 }
+
+extension CameraViewController: AVCapturePhotoCaptureDelegate {
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard let imageData = photo.fileDataRepresentation() else { return }
+        showLoadingScene(imageData: imageData)
+        photoOutput(imageData: imageData)
+    }
+    
+}

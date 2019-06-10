@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 import NVActivityIndicatorView
 
 class CameraViewController: UIViewController, NVActivityIndicatorViewable {
@@ -35,23 +34,17 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBAction func tapTakePhotoButton(_ sender: Any) {
         takePhotoButton.isEnabled = false
-        cameraViewSetting.settingPhotoOutput(delegate: self as AVCapturePhotoCaptureDelegate)
+        cameraViewSetting.settingPhotoOutput(delegate: self)
     }
     
-    private func showLoadingScene(imageData: Data) {
+    func showLoadingScene(imageData: Data) {
         self.startAnimating(message: "文字認識中...", type: .pacman)
         screenshotImageView.image = UIImage(data: imageData)
         screenshotImageView.isHidden = false
         self.view.bringSubviewToFront(takePhotoButton)
     }
     
-}
-
-extension CameraViewController: AVCapturePhotoCaptureDelegate {
-    
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        guard let imageData = photo.fileDataRepresentation() else { return }
-        self.showLoadingScene(imageData: imageData)
+    func photoOutput(imageData: Data) {
         self.cameraViewControllerPresenter.photoOutput(imageData: imageData)
     }
     
