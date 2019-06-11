@@ -12,7 +12,8 @@ import NVActivityIndicatorView
 class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
     private let cameraViewControllerPresenter = CameraViewControllerPresenter()
-    private let cameraViewSetting = CameraViewSetting()
+    // TODO: 役割に合わせたクラス名に変更
+    private var cameraViewSetting: CameraViewSetting?
     
     @IBOutlet var takePhotoButton: UIButton!
     @IBOutlet var screenshotImageView: UIImageView!
@@ -20,9 +21,19 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraViewControllerPresenter.delegate = self
-        cameraViewSetting.setup()
-        guard let cameraPreviewLayer = cameraViewSetting.generateCameraPreviewLayer(frame: screenshotImageView.frame) else { return }
-        self.view.layer.insertSublayer(cameraPreviewLayer, at: 0)
+        cameraViewSetting = CameraViewSetting.create(frame: screenshotImageView.frame, takePhotoHandler: { [weak self] imageData in
+            guard let self = self,
+                let imageData = imageData else {
+                    print("画像取得に失敗")
+                    return
+            }
+            self.showLoadingScene(imageData: imageData)
+            self.photoOutput(imageData: imageData)
+        })
+        
+        if let cameraPreviewLayer = cameraViewSetting?.generateCameraPreviewLayer(frame: screenshotImageView.frame) {
+            self.view.layer.insertSublayer(cameraPreviewLayer, at: 0)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -34,17 +45,17 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBAction func tapTakePhotoButton(_ sender: Any) {
         takePhotoButton.isEnabled = false
-        cameraViewSetting.settingPhotoOutput(delegate: self)
+        cameraViewSetting?.takePhoto()
     }
     
-    func showLoadingScene(imageData: Data) {
+    private func showLoadingScene(imageData: Data) {
         self.startAnimating(message: "文字認識中...", type: .pacman)
         screenshotImageView.image = UIImage(data: imageData)
         screenshotImageView.isHidden = false
         self.view.bringSubviewToFront(takePhotoButton)
     }
     
-    func photoOutput(imageData: Data) {
+    private func photoOutput(imageData: Data) {
         self.cameraViewControllerPresenter.photoOutput(imageData: imageData)
     }
     
@@ -62,8 +73,8 @@ extension CameraViewController: CameraViewPresenterDelegate {
         self.performSegue(withIdentifier: "toResultViewController", sender: result)
     }
     
-    func showAlert() {
-        let alertController = UIAlertController(title: "文字認識に失敗しました", message: "再度お試しください。", preferredStyle: .alert)
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }

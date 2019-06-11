@@ -11,7 +11,7 @@ import Foundation
 protocol CameraViewPresenterDelegate: class {
     func hideLoadingScene()
     func prepare(result: String)
-    func showAlert()
+    func showAlert(title: String, message: String)
 }
 
 class CameraViewControllerPresenter {
@@ -28,7 +28,7 @@ class CameraViewControllerPresenter {
                     self.delegate?.prepare(result: result)
                     return
                 }
-                self.delegate?.showAlert()
+                self.delegate?.showAlert(title: "文字認識に失敗しました", message: "再度お試しください。")
             }
         }
     }

@@ -8,22 +8,39 @@
 
 import AVFoundation
 
-class CameraViewSetting {
+class CameraViewSetting: NSObject {
     
     let captureSession = AVCaptureSession()
     var captureDevice: AVCaptureDevice?
     var photoOutput: AVCapturePhotoOutput?
     var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
-    func setup() {
-        setupCaptureSession()
-        setupDevice()
-        setupInputAndOutput()
-        captureSession.startRunning()
+    typealias PhotoResultHandler = ((Data?) -> ())
+    var takePhotoHandler: PhotoResultHandler?
+    
+    static func create(frame: CGRect, takePhotoHandler: @escaping PhotoResultHandler) -> CameraViewSetting {
+        let cvs = CameraViewSetting.init()
+        cvs.takePhotoHandler = takePhotoHandler
+        cvs.setup()
+        return cvs
     }
     
     func generateCameraPreviewLayer(frame: CGRect) -> AVCaptureVideoPreviewLayer? {
         return setupPreviewLayer(frame: frame)
+    }
+    
+    func takePhoto() {
+        let settings = AVCapturePhotoSettings()
+        settings.flashMode = .auto
+        settings.isAutoStillImageStabilizationEnabled = true
+        photoOutput?.capturePhoto(with: settings, delegate: self)
+    }
+    
+    private func setup() {
+        setupCaptureSession()
+        setupDevice()
+        setupInputAndOutput()
+        captureSession.startRunning()
     }
     
     /// カメラ画質の設定
@@ -69,21 +86,12 @@ class CameraViewSetting {
         return self.cameraPreviewLayer
     }
     
-    func settingPhotoOutput(delegate: AVCapturePhotoCaptureDelegate) {
-        let settings = AVCapturePhotoSettings()
-        settings.flashMode = .auto
-        settings.isAutoStillImageStabilizationEnabled = true
-        photoOutput?.capturePhoto(with: settings, delegate: delegate)
-    }
-    
 }
 
-extension CameraViewController: AVCapturePhotoCaptureDelegate {
+extension CameraViewSetting: AVCapturePhotoCaptureDelegate {
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
-        guard let imageData = photo.fileDataRepresentation() else { return }
-        showLoadingScene(imageData: imageData)
-        photoOutput(imageData: imageData)
+        takePhotoHandler?(photo.fileDataRepresentation())
     }
     
 }
