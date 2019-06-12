@@ -24,9 +24,9 @@ class TopTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setItem(_ item: Item) {
-        titleLabel.text = item.title
-        if let date = item.date {
+    func setItem(_ info: RecognitionInfo) {
+        titleLabel.text = info.title
+        if let date = info.date {
             dateLabel.text = dateFormat(date: date)
         }
     }

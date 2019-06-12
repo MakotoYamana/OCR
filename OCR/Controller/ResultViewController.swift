@@ -25,6 +25,11 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
         self.detailTextView.text = self.resultText
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        resultViewControllerPresenter.viewDidDisappear()
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }

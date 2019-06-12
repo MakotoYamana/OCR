@@ -9,19 +9,19 @@
 import Foundation
 
 protocol ViewControllerModelDelegate {
-    func reload(items: [Item])
+    func reload(info: [RecognitionInfo])
 }
 
 class ViewControllerModel {
     
-    private let coreDataManager = CoreDataManager()
+    private let coreDataManager = CoreDataManager.shared
     private let cloudVisionAPI = CloudVisionAPI()
     
     var delegates: [String: ViewControllerModelDelegate] = [:]
-    private var items: [Item] = [] {
+    private var recognitionsInfo: [RecognitionInfo] = [] {
         didSet {
             delegates.values.forEach { delegate in
-                delegate.reload(items: items)
+                delegate.reload(info: recognitionsInfo)
             }
         }
     }
@@ -34,26 +34,54 @@ class ViewControllerModel {
         delegates.removeValue(forKey: id)
     }
     
-    func get() -> [Item] {
-        return coreDataManager.getData()
+    func get() -> [RecognitionInfo] {
+        self.recognitionsInfo = coreDataManager.getInfo()
+        return self.recognitionsInfo
     }
     
     func insert(titleText: String, resultText: String) {
-        coreDataManager.insertData(titleText: titleText, resultText: resultText)
+        let new = RecognitionInfo.new(titleText: titleText, detail: resultText)
+        self.recognitionsInfo += [new]
+        coreDataManager.insertData(with: new)
     }
     
-    func update(titleText: String, detailText: String, item: Item) {
-        coreDataManager.updateData(titleText: titleText, detailText: detailText, item: item)
+    func update(titleText: String, detailText: String, info: RecognitionInfo) {
+        var updated = info
+        updated.title = titleText
+        updated.detail = detailText
+        updated.date = Date()
+        coreDataManager.updateData(with: updated)
+        
+        self.recognitionsInfo = self.recognitionsInfo.map {
+            guard $0.uniqueDate == info.uniqueDate else {
+                return $0
+            }
+            return updated
+        }
     }
     
-    func delete(item: Item) {
-        coreDataManager.deleteData(item: item)
+    func delete(info: RecognitionInfo) {
+        coreDataManager.deleteData(with: info)
+        recognitionsInfo = recognitionsInfo.filter { $0.uniqueDate != info.uniqueDate }
     }
     
     func request(imageData: Data, completionHandler: @escaping (String) -> ()) {
         cloudVisionAPI.requestAPI(imageDataString: imageData.base64EncodedString()) { result in
             completionHandler(result)
         }
+    }
+    
+}
+
+struct RecognitionInfo {
+    
+    var title: String?
+    var detail: String?
+    var date: Date?
+    var uniqueDate: Date
+    
+    static func new(titleText: String, detail: String) -> RecognitionInfo {
+        return RecognitionInfo(title: titleText, detail: detail, date: Date(), uniqueDate: Date())
     }
     
 }

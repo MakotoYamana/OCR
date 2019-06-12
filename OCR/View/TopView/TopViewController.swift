@@ -29,36 +29,41 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         topViewControllerPresenter.viewWillAppear()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        topViewControllerPresenter.viewDidDisappear()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailViewController" {
             guard let detailViewController = segue.destination as? DetailViewController,
-                let item = sender as? Item else {
+                let info = sender as? RecognitionInfo else {
                     print("画面遷移またはデータ取得に失敗")
                     return
             }
-            topViewControllerPresenter.prepareFor(detailViewController: detailViewController, item :item)
+            topViewControllerPresenter.prepareFor(detailViewController: detailViewController, info :info)
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return topViewControllerPresenter.viewItems.count
+        return topViewControllerPresenter.viewInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TopTableViewCell", for: indexPath) as! TopTableViewCell
-        cell.setItem(topViewControllerPresenter.viewItems[indexPath.row])
+        cell.setItem(topViewControllerPresenter.viewInfo[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = topViewControllerPresenter.viewItems[indexPath.row]
+        let selectedItem = topViewControllerPresenter.viewInfo[indexPath.row]
         performSegue(withIdentifier: "toDetailViewController", sender: selectedItem)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let deleteItem = topViewControllerPresenter.viewItems[indexPath.row]
-            topViewControllerPresenter.swipeDelete(item: deleteItem)
+            let deleteItem = topViewControllerPresenter.viewInfo[indexPath.row]
+            topViewControllerPresenter.swipeDelete(info: deleteItem)
         }
     }
     

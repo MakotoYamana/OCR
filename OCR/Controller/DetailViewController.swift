@@ -12,7 +12,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     let detailViewControllerPresenter = DetailViewControllerPresenter()
     
-    var item: Item?
+    var info: RecognitionInfo?
     
     @IBOutlet var titleTextField: UITextField!
     @IBOutlet var detailTextView: UITextView!
@@ -22,8 +22,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         detailViewControllerPresenter.delegate = self
         detailViewControllerPresenter.viewDidLoad()
         titleTextField.delegate = self
-        titleTextField.text = item?.title
-        detailTextView.text = item?.detail
+        titleTextField.text = info?.title
+        detailTextView.text = info?.detail
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        detailViewControllerPresenter.viewDidDisappear()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -31,7 +36,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func tapSaveButton(_ sender: Any) {
-        detailViewControllerPresenter.tapSaveButton(titleText: titleTextField.text, detailText: detailTextView.text, item: item)
+        guard let info = info else { return }
+        detailViewControllerPresenter.tapSaveButton(titleText: titleTextField.text, detailText: detailTextView.text, info: info)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

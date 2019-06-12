@@ -16,29 +16,29 @@ protocol DetailViewPresenterDelegate: class {
 class DetailViewControllerPresenter {
     
     var viewControllerModel: ViewControllerModel?
-    
-    var viewItems: [Item] = []
     weak var delegate: DetailViewPresenterDelegate?
     
-    deinit {
-        viewControllerModel?.unregister(id: "DetailViewPresenter")
-    }
+    var info: RecognitionInfo?
     
     func viewDidLoad() {
         viewControllerModel?.register(id: "DetailViewPresenter", delegate: self)
+    }
+    
+    func viewDidDisappear() {
+        viewControllerModel?.unregister(id: "DetailViewPresenter")
     }
     
     func setModel(model: ViewControllerModel) {
         viewControllerModel = model
     }
     
-    func tapSaveButton(titleText: String?, detailText: String, item: Item?) {
+    func tapSaveButton(titleText: String?, detailText: String, info: RecognitionInfo?) {
         guard let titleText = titleText,
-            let item = item else { return }
+            let info = info else { return }
         if titleText == "" {
             delegate?.showAlert()
         } else {
-            self.viewControllerModel?.update(titleText: titleText, detailText: detailText, item: item)
+            self.viewControllerModel?.update(titleText: titleText, detailText: detailText, info: info)
             delegate?.closeDetailView()
         }
     }
@@ -47,11 +47,9 @@ class DetailViewControllerPresenter {
 
 extension DetailViewControllerPresenter: ViewControllerModelDelegate {
     
-    func reload(items: [Item]) {
-        self.viewItems = items.sorted {
-            guard let lhsDate = $0.date,
-                let rhsDate = $1.date else { return false }
-            return lhsDate < rhsDate
+    func reload(info: [RecognitionInfo]) {
+        if let refreshedInfo = info.first(where: { $0.uniqueDate == self.info?.uniqueDate }) {
+            self.info = refreshedInfo
         }
     }
 }

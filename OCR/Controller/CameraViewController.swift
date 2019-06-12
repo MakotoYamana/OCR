@@ -22,13 +22,14 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
         super.viewDidLoad()
         cameraViewControllerPresenter.delegate = self
         cameraViewSetting = CameraViewSetting.create(frame: screenshotImageView.frame, takePhotoHandler: { [weak self] imageData in
-            guard let self = self,
-                let imageData = imageData else {
-                    print("画像取得に失敗")
-                    return
+            guard let weakSelf = self else { return }
+            guard let imageData = imageData else {
+                weakSelf.showAlert(title: "画像取得に失敗しました", message: "再度お試しください。")
+                weakSelf.takePhotoButton.isEnabled = true
+                return
             }
-            self.showLoadingScene(imageData: imageData)
-            self.photoOutput(imageData: imageData)
+            weakSelf.showLoadingScene(imageData: imageData)
+            weakSelf.photoOutput(imageData: imageData)
         })
         
         if let cameraPreviewLayer = cameraViewSetting?.generateCameraPreviewLayer(frame: screenshotImageView.frame) {

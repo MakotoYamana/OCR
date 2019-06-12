@@ -16,12 +16,8 @@ class TopViewControllerPresenter {
     
     private let viewControllerModel = ViewControllerModel()
 
-    var viewItems: [Item] = []
+    var viewInfo: [RecognitionInfo] = []
     weak var delegate: TopViewPresenterDelegate?
-    
-    deinit {
-        viewControllerModel.unregister(id: "TopViewPresenter")
-    }
     
     func viewDidLoad() {
         viewControllerModel.register(id: "TopViewPresenter", delegate: self)
@@ -31,8 +27,12 @@ class TopViewControllerPresenter {
         getItems()
     }
     
+    func viewDidDisappear() {
+        viewControllerModel.unregister(id: "TopViewPresenter")
+    }
+    
     private func getItems() {
-        viewItems = viewControllerModel.get().sorted {
+        viewInfo = viewControllerModel.get().sorted {
             guard let lhsDate = $0.date,
                 let rhsDate = $1.date else { return false }
             return lhsDate < rhsDate
@@ -40,22 +40,24 @@ class TopViewControllerPresenter {
         delegate?.reload()
     }
     
-    func prepareFor(detailViewController: DetailViewController, item: Item) {
+    func prepareFor(detailViewController: DetailViewController, info: RecognitionInfo) {
         detailViewController.detailViewControllerPresenter.setModel(model: viewControllerModel)
-        detailViewController.item = item
+        detailViewController.info = info
     }
     
-    func swipeDelete(item: Item) {
-        viewControllerModel.delete(item: item)
-        getItems()
+    func swipeDelete(info: RecognitionInfo) {
+        viewControllerModel.delete(info: info)
     }
     
 }
 
 extension TopViewControllerPresenter: ViewControllerModelDelegate {
     
-    func reload(items: [Item]) {
-        self.viewItems = items.sorted {
+    func reload(info: [RecognitionInfo]) {
+        defer {
+            delegate?.reload()
+        }
+        self.viewInfo = info.sorted {
             guard let lhsDate = $0.date,
                 let rhsDate = $1.date else { return false }
             return lhsDate < rhsDate
