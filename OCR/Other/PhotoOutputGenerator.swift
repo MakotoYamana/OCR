@@ -1,5 +1,5 @@
 //
-//  CameraViewSetting.swift
+//  PhotoOutputGenerator.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/06/08.
@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-class CameraViewSetting: NSObject {
+class PhotoOutputGenerator: NSObject {
     
     let captureSession = AVCaptureSession()
     var captureDevice: AVCaptureDevice?
@@ -18,8 +18,8 @@ class CameraViewSetting: NSObject {
     typealias PhotoResultHandler = ((Data?) -> ())
     var takePhotoHandler: PhotoResultHandler?
     
-    static func create(frame: CGRect, takePhotoHandler: @escaping PhotoResultHandler) -> CameraViewSetting {
-        let cvs = CameraViewSetting.init()
+    static func create(frame: CGRect, takePhotoHandler: @escaping PhotoResultHandler) -> PhotoOutputGenerator {
+        let cvs = PhotoOutputGenerator.init()
         cvs.takePhotoHandler = takePhotoHandler
         cvs.setup()
         return cvs
@@ -88,7 +88,7 @@ class CameraViewSetting: NSObject {
     
 }
 
-extension CameraViewSetting: AVCapturePhotoCaptureDelegate {
+extension PhotoOutputGenerator: AVCapturePhotoCaptureDelegate {
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         takePhotoHandler?(photo.fileDataRepresentation())

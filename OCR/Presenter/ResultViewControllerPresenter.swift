@@ -15,17 +15,17 @@ protocol ResultViewPresenterDelegate: class {
 
 class ResultViewControllerPresenter {
     
-    private let viewControllerModel = ViewControllerModel()
+    private let ocrModel = OCRModel()
     
     var viewInfo: [RecognitionInfo] = []
     weak var delegate: ResultViewPresenterDelegate?
     
     func viewDidLoad() {
-        viewControllerModel.register(id: "ResultViewPresenter", delegate: self)
+        ocrModel.register(id: "ResultViewPresenter", delegate: self)
     }
     
     func viewDidDisappear() {
-        viewControllerModel.unregister(id: "ResultViewPresenter")
+        ocrModel.unregister(id: "ResultViewPresenter")
     }
     
     func tapSaveButton(titleText: String?, resultText: String) {
@@ -33,14 +33,14 @@ class ResultViewControllerPresenter {
         if titleText == "" {
             delegate?.showAlert()
         } else {
-            viewControllerModel.insert(titleText: titleText, resultText: resultText)
+            ocrModel.insert(titleText: titleText, resultText: resultText)
             delegate?.closeResultView()
         }
     }
     
 }
 
-extension ResultViewControllerPresenter: ViewControllerModelDelegate {
+extension ResultViewControllerPresenter: OCRModelDelegate {
     
     func reload(info: [RecognitionInfo]) {
         self.viewInfo = info.sorted {

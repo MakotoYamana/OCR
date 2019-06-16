@@ -1,5 +1,5 @@
 //
-//  UrlRequester.swift
+//  URLRequester.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/03.
@@ -9,13 +9,13 @@
 import SwiftyJSON
 import Keys
 
-class UrlRequester {
+class URLRequester {
     
     static let cloudVisionAPIKey = OCRKeys().cloudVisionAPIKey
-    static let googleUrlString = "https://vision.googleapis.com/v1/images:annotate?key=\(cloudVisionAPIKey)"
+    static let googleURLString = "https://vision.googleapis.com/v1/images:annotate?key=\(cloudVisionAPIKey)"
     
     static func create(jsonRequest: [String: [String: Any]]) -> URLRequest {
-        guard let url = URL(string: self.googleUrlString) else { fatalError("URLが無効") }
+        guard let url = URL(string: self.googleURLString) else { fatalError("URLが無効") }
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "POST"

@@ -14,13 +14,13 @@ protocol TopViewPresenterDelegate: class {
 
 class TopViewControllerPresenter {
     
-    private let viewControllerModel = ViewControllerModel()
+    private let ocrModel = OCRModel()
 
     var viewInfo: [RecognitionInfo] = []
     weak var delegate: TopViewPresenterDelegate?
     
     func viewDidLoad() {
-        viewControllerModel.register(id: "TopViewPresenter", delegate: self)
+        ocrModel.register(id: "TopViewPresenter", delegate: self)
     }
     
     func viewWillAppear() {
@@ -28,11 +28,11 @@ class TopViewControllerPresenter {
     }
     
     func viewDidDisappear() {
-        viewControllerModel.unregister(id: "TopViewPresenter")
+        ocrModel.unregister(id: "TopViewPresenter")
     }
     
     private func getItems() {
-        viewInfo = viewControllerModel.get().sorted {
+        viewInfo = ocrModel.get().sorted {
             guard let lhsDate = $0.date,
                 let rhsDate = $1.date else { return false }
             return lhsDate < rhsDate
@@ -41,17 +41,17 @@ class TopViewControllerPresenter {
     }
     
     func prepareFor(detailViewController: DetailViewController, info: RecognitionInfo) {
-        detailViewController.detailViewControllerPresenter.setModel(model: viewControllerModel)
+        detailViewController.detailViewControllerPresenter.setModel(model: ocrModel)
         detailViewController.info = info
     }
     
     func swipeDelete(info: RecognitionInfo) {
-        viewControllerModel.delete(info: info)
+        ocrModel.delete(info: info)
     }
     
 }
 
-extension TopViewControllerPresenter: ViewControllerModelDelegate {
+extension TopViewControllerPresenter: OCRModelDelegate {
     
     func reload(info: [RecognitionInfo]) {
         defer {

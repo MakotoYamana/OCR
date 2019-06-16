@@ -12,8 +12,7 @@ import NVActivityIndicatorView
 class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
     private let cameraViewControllerPresenter = CameraViewControllerPresenter()
-    // TODO: 役割に合わせたクラス名に変更
-    private var cameraViewSetting: CameraViewSetting?
+    private var photoOutputGenerator: PhotoOutputGenerator?
     
     @IBOutlet var takePhotoButton: UIButton!
     @IBOutlet var screenshotImageView: UIImageView!
@@ -21,7 +20,7 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraViewControllerPresenter.delegate = self
-        cameraViewSetting = CameraViewSetting.create(frame: screenshotImageView.frame, takePhotoHandler: { [weak self] imageData in
+        photoOutputGenerator = PhotoOutputGenerator.create(frame: screenshotImageView.frame, takePhotoHandler: { [weak self] imageData in
             guard let weakSelf = self else { return }
             guard let imageData = imageData else {
                 weakSelf.showAlert(title: "画像取得に失敗しました", message: "再度お試しください。")
@@ -32,7 +31,7 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
             weakSelf.photoOutput(imageData: imageData)
         })
         
-        if let cameraPreviewLayer = cameraViewSetting?.generateCameraPreviewLayer(frame: screenshotImageView.frame) {
+        if let cameraPreviewLayer = photoOutputGenerator?.generateCameraPreviewLayer(frame: screenshotImageView.frame) {
             self.view.layer.insertSublayer(cameraPreviewLayer, at: 0)
         }
     }
@@ -46,7 +45,7 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
     @IBAction func tapTakePhotoButton(_ sender: Any) {
         takePhotoButton.isEnabled = false
-        cameraViewSetting?.takePhoto()
+        photoOutputGenerator?.takePhoto()
     }
     
     private func showLoadingScene(imageData: Data) {

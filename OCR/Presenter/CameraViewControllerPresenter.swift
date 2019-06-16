@@ -16,12 +16,12 @@ protocol CameraViewPresenterDelegate: class {
 
 class CameraViewControllerPresenter {
     
-    private let viewControllerModel = ViewControllerModel()
+    private let ocrModel = OCRModel()
     
     weak var delegate: CameraViewPresenterDelegate?
     
     func photoOutput(imageData: Data) {
-        viewControllerModel.request(imageData: imageData) { result in
+        ocrModel.request(imageData: imageData) { result in
             DispatchQueue.main.async {
                 self.delegate?.hideLoadingScene()
                 guard result == "null" else {

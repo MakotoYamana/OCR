@@ -1,5 +1,5 @@
 //
-//  ViewControllerModel.swift
+//  OCRModel.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/22.
@@ -8,16 +8,16 @@
 
 import Foundation
 
-protocol ViewControllerModelDelegate {
+protocol OCRModelDelegate {
     func reload(info: [RecognitionInfo])
 }
 
-class ViewControllerModel {
+class OCRModel {
     
     private let coreDataManager = CoreDataManager.shared
     private let cloudVisionAPI = CloudVisionAPI()
     
-    var delegates: [String: ViewControllerModelDelegate] = [:]
+    var delegates: [String: OCRModelDelegate] = [:]
     private var recognitionsInfo: [RecognitionInfo] = [] {
         didSet {
             delegates.values.forEach { delegate in
@@ -26,7 +26,7 @@ class ViewControllerModel {
         }
     }
     
-    func register(id: String, delegate: ViewControllerModelDelegate) {
+    func register(id: String, delegate: OCRModelDelegate) {
         delegates[id] = delegate
     }
     
