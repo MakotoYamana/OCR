@@ -8,9 +8,20 @@
 
 import CoreData
 
+enum recognitionResultStatus {
+    case success([RecognitionInfo])
+    case failuer(Error)
+    case empty
+}
+
+protocol CoreDataManagerDelegate: class {
+    func recognitionResult(result: recognitionResultStatus)
+}
+
 class CoreDataManager {
     
     static let shared = CoreDataManager()
+    var delegate: CoreDataManagerDelegate?
     
     // MARK: - Core Data stack
     
@@ -38,15 +49,17 @@ class CoreDataManager {
         }
     }
     
-    func getInfo() -> [RecognitionInfo] {
+    func getInfo() {
         let context = persistentContainer.viewContext
         do {
             let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
             let items = try context.fetch(fetchRequest)
-            return items.compactMap { $0.toRecognitionInfo() }
-        } catch {
-            print("データ取得に失敗")
-            return []
+            if items.isEmpty {
+                self.delegate?.recognitionResult(result: .empty)
+            }
+            self.delegate?.recognitionResult(result: .success(items.compactMap { $0.toRecognitionInfo() }))
+        } catch let error {
+            self.delegate?.recognitionResult(result: .failuer(error))
         }
     }
     
@@ -64,8 +77,8 @@ class CoreDataManager {
             item.first?.title = info.title
             item.first?.detail = info.detail
             item.first?.date = info.date
-        } catch {
-            print("データ取得に失敗")
+        } catch let error {
+            self.delegate?.recognitionResult(result: .failuer(error))
         }
         saveContext()
     }
@@ -77,8 +90,8 @@ class CoreDataManager {
             if let item = try context.fetch(fetchRequest).first {
                 context.delete(item)
             }
-        } catch {
-            print("データ取得に失敗")
+        } catch let error {
+            self.delegate?.recognitionResult(result: .failuer(error))
         }
         saveContext()
     }

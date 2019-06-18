@@ -32,12 +32,7 @@ class TopViewControllerPresenter {
     }
     
     private func getItems() {
-        viewInfo = ocrModel.get().sorted {
-            guard let lhsDate = $0.date,
-                let rhsDate = $1.date else { return false }
-            return lhsDate < rhsDate
-        }
-        delegate?.reload()
+        ocrModel.get()
     }
     
     func prepareFor(detailViewController: DetailViewController, info: RecognitionInfo) {

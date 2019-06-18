@@ -27,6 +27,7 @@ class OCRModel {
     }
     
     func register(id: String, delegate: OCRModelDelegate) {
+        coreDataManager.delegate = self
         delegates[id] = delegate
     }
     
@@ -34,9 +35,8 @@ class OCRModel {
         delegates.removeValue(forKey: id)
     }
     
-    func get() -> [RecognitionInfo] {
-        self.recognitionsInfo = coreDataManager.getInfo()
-        return self.recognitionsInfo
+    func get() {
+        coreDataManager.getInfo()
     }
     
     func insert(titleText: String, resultText: String) {
@@ -71,6 +71,23 @@ class OCRModel {
         }
     }
     
+}
+
+extension OCRModel: CoreDataManagerDelegate {
+    
+    func recognitionResult(result: recognitionResultStatus) {
+        switch result {
+        case .success(let response):
+            self.recognitionsInfo = response
+        case .failuer(let error):
+            self.delegates.values.forEach { delegate in
+                // TODO: 各Presenterを経由してアラートを出す
+            }
+        case .empty:
+            self.recognitionsInfo = []
+        }
+    }
+
 }
 
 struct RecognitionInfo {
