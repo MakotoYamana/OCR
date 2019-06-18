@@ -18,7 +18,7 @@ class CoreDataManager {
         let container = NSPersistentContainer(name: "OCR")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                assert(false, "Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
@@ -33,7 +33,7 @@ class CoreDataManager {
                 try context.save()
             } catch {
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                assert(false, "Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }

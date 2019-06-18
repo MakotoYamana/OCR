@@ -15,14 +15,14 @@ class URLRequester {
     static let googleURLString = "https://vision.googleapis.com/v1/images:annotate?key=\(cloudVisionAPIKey)"
     
     static func create(jsonRequest: [String: [String: Any]]) -> URLRequest {
-        guard let url = URL(string: self.googleURLString) else { fatalError("URLが無効") }
+        guard let url = URL(string: self.googleURLString) else { assert(false, "URLが無効") }
         var urlRequest = URLRequest(url: url)
         
         urlRequest.httpMethod = "POST"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.addValue(Bundle.main.bundleIdentifier ?? "", forHTTPHeaderField: "X-Ios-Bundle-Identifier")
         
-        guard let data = try? JSON(jsonRequest).rawData() else { fatalError("データへの変換に失敗") }
+        guard let data = try? JSON(jsonRequest).rawData() else { assert(false, "データへの変換に失敗") }
         urlRequest.httpBody = data
         
         return urlRequest

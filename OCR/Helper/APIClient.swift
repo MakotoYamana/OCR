@@ -19,13 +19,13 @@ class APIClient {
         let task = session.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
             if let _ = response as? HTTPURLResponse {
                 guard let data = data else {
-                    fatalError("データ取得に失敗")
+                    assert(false, "データ取得に失敗")
                 }
                 completionHandler(.success(data))
             } else if let error = error {
                 completionHandler(.failure(error))
             } else {
-                fatalError("その他のエラー")
+                assert(false, "その他のエラー")
             }
             session.finishTasksAndInvalidate()
         }
