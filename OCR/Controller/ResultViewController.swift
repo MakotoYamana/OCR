@@ -20,14 +20,8 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         resultViewControllerPresenter.delegate = self
-        resultViewControllerPresenter.viewDidLoad()
         titleTextField.delegate = self
         self.detailTextView.text = self.resultText
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        resultViewControllerPresenter.viewDidDisappear()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

@@ -17,16 +17,7 @@ class ResultViewControllerPresenter {
     
     private let ocrModel = OCRModel()
     
-    var viewInfo: [RecognitionInfo] = []
     weak var delegate: ResultViewPresenterDelegate?
-    
-    func viewDidLoad() {
-        ocrModel.register(id: "ResultViewPresenter", delegate: self)
-    }
-    
-    func viewDidDisappear() {
-        ocrModel.unregister(id: "ResultViewPresenter")
-    }
     
     func tapSaveButton(titleText: String?, resultText: String) {
         guard let titleText = titleText else { return }
@@ -38,15 +29,4 @@ class ResultViewControllerPresenter {
         }
     }
     
-}
-
-extension ResultViewControllerPresenter: OCRModelDelegate {
-    
-    func reload(info: [RecognitionInfo]) {
-        self.viewInfo = info.sorted {
-            guard let lhsDate = $0.date,
-                let rhsDate = $1.date else { return false }
-            return lhsDate < rhsDate
-        }
-    }
 }
