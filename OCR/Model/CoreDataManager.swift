@@ -8,14 +8,20 @@
 
 import CoreData
 
-enum recognitionResultStatus {
+enum RecognitionResultType {
     case success([RecognitionInfo])
-    case failuer(Error)
+    case failuer(ErrorType)
     case empty
 }
 
+enum ErrorType {
+    case fetch
+    case update
+    case delete
+}
+
 protocol CoreDataManagerDelegate: class {
-    func recognitionResult(result: recognitionResultStatus)
+    func recognitionResult(result: RecognitionResultType)
 }
 
 class CoreDataManager {
@@ -58,8 +64,8 @@ class CoreDataManager {
                 self.delegate?.recognitionResult(result: .empty)
             }
             self.delegate?.recognitionResult(result: .success(items.compactMap { $0.toRecognitionInfo() }))
-        } catch let error {
-            self.delegate?.recognitionResult(result: .failuer(error))
+        } catch {
+            self.delegate?.recognitionResult(result: .failuer(.fetch))
         }
     }
     
@@ -77,8 +83,8 @@ class CoreDataManager {
             item.first?.title = info.title
             item.first?.detail = info.detail
             item.first?.date = info.date
-        } catch let error {
-            self.delegate?.recognitionResult(result: .failuer(error))
+        } catch {
+            self.delegate?.recognitionResult(result: .failuer(.update))
         }
         saveContext()
     }
@@ -90,8 +96,8 @@ class CoreDataManager {
             if let item = try context.fetch(fetchRequest).first {
                 context.delete(item)
             }
-        } catch let error {
-            self.delegate?.recognitionResult(result: .failuer(error))
+        } catch {
+            self.delegate?.recognitionResult(result: .failuer(.delete))
         }
         saveContext()
     }

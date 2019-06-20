@@ -1,5 +1,5 @@
 //
-//  ResultViewController.swift
+//  RecognitionResultView.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/04.
@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ResultViewController: UIViewController, UITextFieldDelegate {
+class RecognitionResultView: UIViewController, UITextFieldDelegate {
     
-    private let resultViewControllerPresenter = ResultViewControllerPresenter()
-    
+    private var recognitionResultViewPresenter: RecognitionResultViewPresenter?
     var resultText = ""
     
     @IBOutlet var titleTextField: UITextField!
@@ -19,7 +18,8 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultViewControllerPresenter.delegate = self
+        recognitionResultViewPresenter = RecognitionResultViewPresenter(model: OCRModel.shared)
+        recognitionResultViewPresenter?.delegate = self
         titleTextField.delegate = self
         self.detailTextView.text = self.resultText
     }
@@ -29,7 +29,7 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func tapSaveButton(_ sender: Any) {
-        resultViewControllerPresenter.tapSaveButton(titleText: titleTextField.text, resultText: resultText)
+        recognitionResultViewPresenter?.tapSaveButton(titleText: titleTextField.text, resultText: resultText)
     }
     
     @IBAction func tapCloseButton(_ sender: Any) {
@@ -43,7 +43,7 @@ class ResultViewController: UIViewController, UITextFieldDelegate {
     
 }
 
-extension ResultViewController: ResultViewPresenterDelegate {
+extension RecognitionResultView: RecognitionResultViewPresenterDelegate {
     
     func closeResultView() {
         if let navigationController = self.presentingViewController as? UINavigationController {

@@ -10,9 +10,12 @@ import Foundation
 
 protocol OCRModelDelegate {
     func reload(info: [RecognitionInfo])
+    func showAlert(errorType: ErrorType)
 }
 
-class OCRModel {
+class OCRModel: OCRListViewPresenterModel, RecognitionResultViewPresenterModel, RecognitionDetailViewPresenterModel {
+    
+    static let shared = OCRModel()
     
     private let coreDataManager = CoreDataManager.shared
     private let cloudVisionAPI = CloudVisionAPI()
@@ -75,13 +78,13 @@ class OCRModel {
 
 extension OCRModel: CoreDataManagerDelegate {
     
-    func recognitionResult(result: recognitionResultStatus) {
+    func recognitionResult(result: RecognitionResultType) {
         switch result {
         case .success(let response):
             self.recognitionsInfo = response
-        case .failuer(let error):
+        case .failuer(let errorType):
             self.delegates.values.forEach { delegate in
-                // TODO: 各Presenterを経由してアラートを出す
+                delegate.showAlert(errorType: errorType)
             }
         case .empty:
             self.recognitionsInfo = []

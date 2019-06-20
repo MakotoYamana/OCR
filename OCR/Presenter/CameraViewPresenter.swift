@@ -1,5 +1,5 @@
 //
-//  CameraViewControllerPresenter.swift
+//  CameraViewPresenter.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/26.
@@ -14,9 +14,9 @@ protocol CameraViewPresenterDelegate: class {
     func showAlert(title: String, message: String)
 }
 
-class CameraViewControllerPresenter {
+class CameraViewPresenter {
     
-    private let ocrModel = OCRModel()
+    private let ocrModel = OCRModel.shared
     
     weak var delegate: CameraViewPresenterDelegate?
     

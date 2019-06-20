@@ -1,5 +1,5 @@
 //
-//  CameraViewController.swift
+//  CameraView.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/03.
@@ -9,9 +9,9 @@
 import UIKit
 import NVActivityIndicatorView
 
-class CameraViewController: UIViewController, NVActivityIndicatorViewable {
+class CameraView: UIViewController, NVActivityIndicatorViewable {
     
-    private let cameraViewControllerPresenter = CameraViewControllerPresenter()
+    private let cameraViewControllerPresenter = CameraViewPresenter()
     private var photoOutputGenerator: PhotoOutputGenerator?
     
     @IBOutlet var takePhotoButton: UIButton!
@@ -37,9 +37,9 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toResultViewController" {
-            let resultViewController = segue.destination as? ResultViewController
-            resultViewController?.resultText = sender as? String ?? ""
+        if segue.identifier == "toRecognitionResultView" {
+            let recognitionResultView = segue.destination as? RecognitionResultView
+            recognitionResultView?.resultText = sender as? String ?? ""
         }
     }
     
@@ -61,7 +61,7 @@ class CameraViewController: UIViewController, NVActivityIndicatorViewable {
     
 }
 
-extension CameraViewController: CameraViewPresenterDelegate {
+extension CameraView: CameraViewPresenterDelegate {
     
     func hideLoadingScene() {
         self.stopAnimating()
@@ -70,7 +70,7 @@ extension CameraViewController: CameraViewPresenterDelegate {
     }
     
     func prepare(result: String) {
-        self.performSegue(withIdentifier: "toResultViewController", sender: result)
+        self.performSegue(withIdentifier: "toRecognitionResultView", sender: result)
     }
     
     func showAlert(title: String, message: String) {
