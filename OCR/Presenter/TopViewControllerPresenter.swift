@@ -21,14 +21,7 @@ class TopViewControllerPresenter {
     
     func viewDidLoad() {
         ocrModel.register(id: "TopViewPresenter", delegate: self)
-    }
-    
-    func viewWillAppear() {
         getItems()
-    }
-    
-    func viewDidDisappear() {
-        ocrModel.unregister(id: "TopViewPresenter")
     }
     
     private func getItems() {

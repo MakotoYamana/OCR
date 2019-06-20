@@ -24,16 +24,6 @@ class TopViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.tableFooterView = UIView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        topViewControllerPresenter.viewWillAppear()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        topViewControllerPresenter.viewDidDisappear()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toDetailViewController" {
             guard let detailViewController = segue.destination as? DetailViewController,
