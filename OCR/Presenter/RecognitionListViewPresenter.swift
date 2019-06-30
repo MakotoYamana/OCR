@@ -1,5 +1,5 @@
 //
-//  OCRListViewPresenter.swift
+//  RecognitionListViewPresenter.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/25.
@@ -8,29 +8,29 @@
 
 import Foundation
 
-protocol OCRListViewPresenterModel {
+protocol RecognitionListViewPresenterModel {
     func register(id: String, delegate: OCRModelDelegate)
     func get()
     func delete(info: RecognitionInfo)
 }
 
-protocol OCRListViewPresenterDelegate: class {
+protocol RecognitionListViewPresenterDelegate: class {
     func reload()
     func showAlert(title: String, message: String)
 }
 
-class OCRListViewPresenter {
+class RecognitionListViewPresenter {
     
-    private var model: OCRListViewPresenterModel?
-    weak var delegate: OCRListViewPresenterDelegate?
+    private var model: RecognitionListViewPresenterModel?
+    weak var delegate: RecognitionListViewPresenterDelegate?
     var viewInfo: [RecognitionInfo] = []
     
-    init(model: OCRListViewPresenterModel) {
+    init(model: RecognitionListViewPresenterModel) {
         self.model = model
     }
     
     func viewDidLoad() {
-        model?.register(id: "OCRListViewPresenter", delegate: self)
+        model?.register(id: "RecognitionListViewPresenter", delegate: self)
         getItems()
     }
     
@@ -48,7 +48,7 @@ class OCRListViewPresenter {
     
 }
 
-extension OCRListViewPresenter: OCRModelDelegate {
+extension RecognitionListViewPresenter: OCRModelDelegate {
     
     func reload(info: [RecognitionInfo]) {
         defer {

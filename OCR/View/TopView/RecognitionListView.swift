@@ -1,5 +1,5 @@
 //
-//  OCRListView.swift
+//  RecognitionListView.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/03.
@@ -8,20 +8,20 @@
 
 import UIKit
 
-class OCRListView: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RecognitionListView: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private var ocrListViewPresenter: OCRListViewPresenter?
+    private var recognitionListViewPresenter: RecognitionListViewPresenter?
     
     @IBOutlet var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ocrListViewPresenter = OCRListViewPresenter(model: OCRModel.shared)
-        ocrListViewPresenter?.delegate = self
-        ocrListViewPresenter?.viewDidLoad()
+        recognitionListViewPresenter = RecognitionListViewPresenter(model: OCRModel.shared)
+        recognitionListViewPresenter?.delegate = self
+        recognitionListViewPresenter?.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "OCRListTableViewCell", bundle: nil), forCellReuseIdentifier: "OCRListTableViewCell")
+        tableView.register(UINib(nibName: "RecognitionListTableViewCell", bundle: nil), forCellReuseIdentifier: "RecognitionListTableViewCell")
         tableView.tableFooterView = UIView()
     }
     
@@ -32,42 +32,42 @@ class OCRListView: UIViewController, UITableViewDelegate, UITableViewDataSource 
                     print("画面遷移またはデータ取得に失敗")
                     return
             }
-            ocrListViewPresenter?.prepareFor(recognitionDetailView: recognitionDetailView, info :info)
+            recognitionListViewPresenter?.prepareFor(recognitionDetailView: recognitionDetailView, info :info)
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let ocrListViewPresenter = ocrListViewPresenter else { return 0 }
-        return ocrListViewPresenter.viewInfo.count
+        guard let recognitionListViewPresenter = recognitionListViewPresenter else { return 0 }
+        return recognitionListViewPresenter.viewInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OCRListTableViewCell", for: indexPath) as! OCRListTableViewCell
-        if let ocrListViewPresenter = ocrListViewPresenter,
-            ocrListViewPresenter.viewInfo.indices.contains(indexPath.row) {
-            cell.setItem(ocrListViewPresenter.viewInfo[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecognitionListTableViewCell", for: indexPath) as! RecognitionListTableViewCell
+        if let recognitionListViewPresenter = recognitionListViewPresenter,
+            recognitionListViewPresenter.viewInfo.indices.contains(indexPath.row) {
+            cell.setItem(recognitionListViewPresenter.viewInfo[indexPath.row])
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let ocrListViewPresenter = ocrListViewPresenter else { return }
-        let selectedItem = ocrListViewPresenter.viewInfo[indexPath.row]
+        guard let recognitionListViewPresenter = recognitionListViewPresenter else { return }
+        let selectedItem = recognitionListViewPresenter.viewInfo[indexPath.row]
         performSegue(withIdentifier: "toRecognitionDetailView", sender: selectedItem)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let ocrListViewPresenter = ocrListViewPresenter else { return }
-            let deleteItem = ocrListViewPresenter.viewInfo[indexPath.row]
-            ocrListViewPresenter.swipeDelete(info: deleteItem)
+            guard let recognitionListViewPresenter = recognitionListViewPresenter else { return }
+            let deleteItem = recognitionListViewPresenter.viewInfo[indexPath.row]
+            recognitionListViewPresenter.swipeDelete(info: deleteItem)
         }
     }
     
 }
 
-extension OCRListView: OCRListViewPresenterDelegate {
+extension RecognitionListView: RecognitionListViewPresenterDelegate {
     
     func reload() {
         DispatchQueue.main.async {

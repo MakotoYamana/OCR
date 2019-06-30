@@ -13,7 +13,7 @@ protocol OCRModelDelegate {
     func showAlert(errorType: ErrorType)
 }
 
-class OCRModel: OCRListViewPresenterModel, RecognitionResultViewPresenterModel, RecognitionDetailViewPresenterModel {
+class OCRModel: RecognitionListViewPresenterModel, RecognitionResultViewPresenterModel, RecognitionDetailViewPresenterModel {
     
     static let shared = OCRModel()
     

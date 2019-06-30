@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		30347AE62299DE6100F07BED /* CameraViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30347AE52299DE6100F07BED /* CameraViewPresenter.swift */; };
 		304C7421228B16FD00FFABA0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304C7420228B16FD00FFABA0 /* CoreDataManager.swift */; };
-		304C7424228DDC6400FFABA0 /* OCRListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304C7422228DDC6400FFABA0 /* OCRListTableViewCell.swift */; };
-		304C7425228DDC6400FFABA0 /* OCRListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 304C7423228DDC6400FFABA0 /* OCRListTableViewCell.xib */; };
+		304C7424228DDC6400FFABA0 /* RecognitionListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304C7422228DDC6400FFABA0 /* RecognitionListTableViewCell.swift */; };
+		304C7425228DDC6400FFABA0 /* RecognitionListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 304C7423228DDC6400FFABA0 /* RecognitionListTableViewCell.xib */; };
 		307D926B227CC04A002806C0 /* RecognitionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307D926A227CC04A002806C0 /* RecognitionResultView.swift */; };
 		30970C06229987340040C418 /* RecognitionResultViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30970C05229987340040C418 /* RecognitionResultViewPresenter.swift */; };
 		30970C082299D2100040C418 /* RecognitionDetailViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30970C072299D2100040C418 /* RecognitionDetailViewPresenter.swift */; };
 		30B0539F227F923100A86A43 /* RecognitionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B0539E227F923100A86A43 /* RecognitionDetailView.swift */; };
 		30C87F9022ABF3FD008CEF44 /* PhotoOutputGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F8F22ABF3FD008CEF44 /* PhotoOutputGenerator.swift */; };
 		30CB5DDC227B5B5200144183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DDB227B5B5200144183 /* AppDelegate.swift */; };
-		30CB5DDE227B5B5200144183 /* OCRListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DDD227B5B5200144183 /* OCRListView.swift */; };
+		30CB5DDE227B5B5200144183 /* RecognitionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DDD227B5B5200144183 /* RecognitionListView.swift */; };
 		30CB5DE1227B5B5200144183 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CB5DDF227B5B5200144183 /* Main.storyboard */; };
 		30CB5DE4227B5B5200144183 /* OCR.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DE2227B5B5200144183 /* OCR.xcdatamodeld */; };
 		30CB5DE6227B5B5300144183 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30CB5DE5227B5B5300144183 /* Assets.xcassets */; };
@@ -27,7 +27,7 @@
 		30CB5DF8227B694600144183 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF7227B694600144183 /* APIClient.swift */; };
 		30CB5DFA227B696700144183 /* URLRequester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CB5DF9227B696700144183 /* URLRequester.swift */; };
 		30F23A5B229591C00068F3C8 /* OCRModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F23A5A229591C00068F3C8 /* OCRModel.swift */; };
-		30F823AF229978A900AE4B65 /* OCRListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F823AE229978A900AE4B65 /* OCRListViewPresenter.swift */; };
+		30F823AF229978A900AE4B65 /* RecognitionListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F823AE229978A900AE4B65 /* RecognitionListViewPresenter.swift */; };
 		CEC6C91CE766F1F6C5DD347E /* Pods_OCR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 298B61F69C2D00AB4C3BEE4E /* Pods_OCR.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,8 +36,8 @@
 		298B61F69C2D00AB4C3BEE4E /* Pods_OCR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OCR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30347AE52299DE6100F07BED /* CameraViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewPresenter.swift; sourceTree = "<group>"; };
 		304C7420228B16FD00FFABA0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		304C7422228DDC6400FFABA0 /* OCRListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OCRListTableViewCell.swift; path = TopView/OCRListTableViewCell.swift; sourceTree = "<group>"; };
-		304C7423228DDC6400FFABA0 /* OCRListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OCRListTableViewCell.xib; path = TopView/OCRListTableViewCell.xib; sourceTree = "<group>"; };
+		304C7422228DDC6400FFABA0 /* RecognitionListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecognitionListTableViewCell.swift; path = TopView/RecognitionListTableViewCell.swift; sourceTree = "<group>"; };
+		304C7423228DDC6400FFABA0 /* RecognitionListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RecognitionListTableViewCell.xib; path = TopView/RecognitionListTableViewCell.xib; sourceTree = "<group>"; };
 		307D926A227CC04A002806C0 /* RecognitionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecognitionResultView.swift; path = ../Controller/RecognitionResultView.swift; sourceTree = "<group>"; };
 		30970C05229987340040C418 /* RecognitionResultViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionResultViewPresenter.swift; sourceTree = "<group>"; };
 		30970C072299D2100040C418 /* RecognitionDetailViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionDetailViewPresenter.swift; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		30C87F8F22ABF3FD008CEF44 /* PhotoOutputGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotoOutputGenerator.swift; path = ../Other/PhotoOutputGenerator.swift; sourceTree = "<group>"; };
 		30CB5DD8227B5B5200144183 /* OCR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CB5DDB227B5B5200144183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		30CB5DDD227B5B5200144183 /* OCRListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OCRListView.swift; path = TopView/OCRListView.swift; sourceTree = "<group>"; };
+		30CB5DDD227B5B5200144183 /* RecognitionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecognitionListView.swift; path = TopView/RecognitionListView.swift; sourceTree = "<group>"; };
 		30CB5DE0227B5B5200144183 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30CB5DE3227B5B5200144183 /* OCR.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OCR.xcdatamodel; sourceTree = "<group>"; };
 		30CB5DE5227B5B5300144183 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		30CB5DF7227B694600144183 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		30CB5DF9227B696700144183 /* URLRequester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequester.swift; sourceTree = "<group>"; };
 		30F23A5A229591C00068F3C8 /* OCRModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRModel.swift; sourceTree = "<group>"; };
-		30F823AE229978A900AE4B65 /* OCRListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRListViewPresenter.swift; sourceTree = "<group>"; };
+		30F823AE229978A900AE4B65 /* RecognitionListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognitionListViewPresenter.swift; sourceTree = "<group>"; };
 		315ADC38A076B8BAD67BDE47 /* Pods-OCR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OCR.release.xcconfig"; path = "Target Support Files/Pods-OCR/Pods-OCR.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,10 +76,10 @@
 			isa = PBXGroup;
 			children = (
 				30CB5DF1227B5E2800144183 /* CameraView.swift */,
-				304C7422228DDC6400FFABA0 /* OCRListTableViewCell.swift */,
-				304C7423228DDC6400FFABA0 /* OCRListTableViewCell.xib */,
-				30CB5DDD227B5B5200144183 /* OCRListView.swift */,
 				30B0539E227F923100A86A43 /* RecognitionDetailView.swift */,
+				304C7422228DDC6400FFABA0 /* RecognitionListTableViewCell.swift */,
+				304C7423228DDC6400FFABA0 /* RecognitionListTableViewCell.xib */,
+				30CB5DDD227B5B5200144183 /* RecognitionListView.swift */,
 				307D926A227CC04A002806C0 /* RecognitionResultView.swift */,
 			);
 			path = View;
@@ -139,8 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				30347AE52299DE6100F07BED /* CameraViewPresenter.swift */,
-				30F823AE229978A900AE4B65 /* OCRListViewPresenter.swift */,
 				30970C072299D2100040C418 /* RecognitionDetailViewPresenter.swift */,
+				30F823AE229978A900AE4B65 /* RecognitionListViewPresenter.swift */,
 				30970C05229987340040C418 /* RecognitionResultViewPresenter.swift */,
 			);
 			path = Presenter;
@@ -237,7 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30CB5DE9227B5B5300144183 /* LaunchScreen.storyboard in Resources */,
-				304C7425228DDC6400FFABA0 /* OCRListTableViewCell.xib in Resources */,
+				304C7425228DDC6400FFABA0 /* RecognitionListTableViewCell.xib in Resources */,
 				30CB5DE6227B5B5300144183 /* Assets.xcassets in Resources */,
 				30CB5DE1227B5B5200144183 /* Main.storyboard in Resources */,
 			);
@@ -302,13 +302,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				30B0539F227F923100A86A43 /* RecognitionDetailView.swift in Sources */,
-				30F823AF229978A900AE4B65 /* OCRListViewPresenter.swift in Sources */,
-				30CB5DDE227B5B5200144183 /* OCRListView.swift in Sources */,
+				30F823AF229978A900AE4B65 /* RecognitionListViewPresenter.swift in Sources */,
+				30CB5DDE227B5B5200144183 /* RecognitionListView.swift in Sources */,
 				30CB5DF2227B5E2800144183 /* CameraView.swift in Sources */,
 				30CB5DE4227B5B5200144183 /* OCR.xcdatamodeld in Sources */,
 				307D926B227CC04A002806C0 /* RecognitionResultView.swift in Sources */,
 				30CB5DFA227B696700144183 /* URLRequester.swift in Sources */,
-				304C7424228DDC6400FFABA0 /* OCRListTableViewCell.swift in Sources */,
+				304C7424228DDC6400FFABA0 /* RecognitionListTableViewCell.swift in Sources */,
 				30CB5DDC227B5B5200144183 /* AppDelegate.swift in Sources */,
 				30F23A5B229591C00068F3C8 /* OCRModel.swift in Sources */,
 				30970C06229987340040C418 /* RecognitionResultViewPresenter.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  OCRListTableViewCell.swift
+//  RecognitionListTableViewCell.swift
 //  OCR
 //
 //  Created by MakotoYamana on 2019/05/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OCRListTableViewCell: UITableViewCell {
+class RecognitionListTableViewCell: UITableViewCell {
     
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!    
