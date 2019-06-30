@@ -24,11 +24,13 @@ class CameraViewPresenter {
         ocrModel.request(imageData: imageData) { result in
             DispatchQueue.main.async {
                 self.delegate?.hideLoadingScene()
-                guard result == "null" else {
+                if result == "null" {
+                    self.delegate?.showAlert(title: "文字認識に失敗しました", message: "再度お試しください。")
+                } else if result == "The Internet connection appears to be offline." {
+                    self.delegate?.showAlert(title: "ネットワークエラーが発生しました", message: "オフラインを解除した上で、再度お試しください。")
+                } else {
                     self.delegate?.prepare(result: result)
-                    return
                 }
-                self.delegate?.showAlert(title: "文字認識に失敗しました", message: "再度お試しください。")
             }
         }
     }
