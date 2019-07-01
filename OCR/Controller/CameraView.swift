@@ -11,7 +11,7 @@ import NVActivityIndicatorView
 
 class CameraView: UIViewController, NVActivityIndicatorViewable {
     
-    private let cameraViewControllerPresenter = CameraViewPresenter()
+    private var cameraViewPresenter = CameraViewPresenter()
     private var photoOutputGenerator: PhotoOutputGenerator?
     
     @IBOutlet var takePhotoButton: UIButton!
@@ -19,7 +19,8 @@ class CameraView: UIViewController, NVActivityIndicatorViewable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cameraViewControllerPresenter.delegate = self
+        cameraViewPresenter = CameraViewPresenter()
+        cameraViewPresenter.delegate = self
         photoOutputGenerator = PhotoOutputGenerator.create(frame: screenshotImageView.frame, takePhotoHandler: { [weak self] imageData in
             guard let self = self else { return }
             guard let imageData = imageData else {
@@ -56,7 +57,7 @@ class CameraView: UIViewController, NVActivityIndicatorViewable {
     }
     
     private func photoOutput(imageData: Data) {
-        self.cameraViewControllerPresenter.photoOutput(imageData: imageData)
+        self.cameraViewPresenter.photoOutput(imageData: imageData)
     }
     
 }

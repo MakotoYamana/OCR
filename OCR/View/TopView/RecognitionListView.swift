@@ -16,7 +16,7 @@ class RecognitionListView: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        recognitionListViewPresenter = RecognitionListViewPresenter(model: OCRModel.shared)
+        recognitionListViewPresenter = RecognitionListViewPresenter()
         recognitionListViewPresenter?.delegate = self
         recognitionListViewPresenter?.viewDidLoad()
         tableView.delegate = self

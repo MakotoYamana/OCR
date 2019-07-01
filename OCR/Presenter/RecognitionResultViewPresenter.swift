@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol RecognitionResultViewPresenterModel {
-    func insert(titleText: String, resultText: String)
-}
-
 protocol RecognitionResultViewPresenterDelegate: class {
     func closeResultView()
     func showAlert()
@@ -21,7 +17,7 @@ class RecognitionResultViewPresenter {
     
     private var model: RecognitionResultViewPresenterModel?
     
-    init(model: RecognitionResultViewPresenterModel) {
+    init(model: RecognitionResultViewPresenterModel = OCRModel.shared) {
         self.model = model
     }
     

@@ -8,12 +8,6 @@
 
 import Foundation
 
-protocol RecognitionListViewPresenterModel {
-    func register(id: String, delegate: OCRModelDelegate)
-    func get()
-    func delete(info: RecognitionInfo)
-}
-
 protocol RecognitionListViewPresenterDelegate: class {
     func reload()
     func showAlert(title: String, message: String)
@@ -25,7 +19,7 @@ class RecognitionListViewPresenter {
     weak var delegate: RecognitionListViewPresenterDelegate?
     var viewInfo: [RecognitionInfo] = []
     
-    init(model: RecognitionListViewPresenterModel) {
+    init(model: RecognitionListViewPresenterModel = OCRModel.shared) {
         self.model = model
     }
     

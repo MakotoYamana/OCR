@@ -18,7 +18,7 @@ class RecognitionDetailView: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        recognitionDetailViewPresenter = RecognitionDetailViewPresenter(model: OCRModel.shared)
+        recognitionDetailViewPresenter = RecognitionDetailViewPresenter()
         recognitionDetailViewPresenter?.delegate = self
         recognitionDetailViewPresenter?.viewDidLoad()
         titleTextField.delegate = self

@@ -16,12 +16,15 @@ protocol CameraViewPresenterDelegate: class {
 
 class CameraViewPresenter {
     
-    private let ocrModel = OCRModel.shared
-    
+    private let model: CameraViewPresenterModel?
     weak var delegate: CameraViewPresenterDelegate?
     
+    init(model: CameraViewPresenterModel = OCRModel.shared) {
+        self.model = model
+    }
+    
     func photoOutput(imageData: Data) {
-        ocrModel.request(imageData: imageData) { result in
+        model?.request(imageData: imageData) { result in
             DispatchQueue.main.async {
                 self.delegate?.hideLoadingScene()
                 if result == "null" {

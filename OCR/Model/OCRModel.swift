@@ -8,12 +8,32 @@
 
 import Foundation
 
+protocol RecognitionListViewPresenterModel {
+    func register(id: String, delegate: OCRModelDelegate)
+    func get()
+    func delete(info: RecognitionInfo)
+}
+
+protocol RecognitionResultViewPresenterModel {
+    func insert(titleText: String, resultText: String)
+}
+
+protocol RecognitionDetailViewPresenterModel {
+    func register(id: String, delegate: OCRModelDelegate)
+    func unregister(id: String)
+    func update(titleText: String, detailText: String, info: RecognitionInfo)
+}
+
+protocol CameraViewPresenterModel {
+    func request(imageData: Data, completionHandler: @escaping (String) -> ())
+}
+
 protocol OCRModelDelegate {
     func reload(info: [RecognitionInfo])
     func showAlert(errorType: ErrorType)
 }
 
-class OCRModel: RecognitionListViewPresenterModel, RecognitionResultViewPresenterModel, RecognitionDetailViewPresenterModel {
+class OCRModel: RecognitionListViewPresenterModel, RecognitionResultViewPresenterModel, RecognitionDetailViewPresenterModel, CameraViewPresenterModel {
     
     static let shared = OCRModel()
     
