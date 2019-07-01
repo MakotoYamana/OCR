@@ -10,7 +10,7 @@ import CoreData
 
 enum RecognitionResultType {
     case success([RecognitionInfo])
-    case failuer(ErrorType)
+    case failure(ErrorType)
     case empty
 }
 
@@ -65,7 +65,7 @@ class CoreDataManager {
             }
             self.delegate?.recognitionResult(result: .success(items.compactMap { $0.toRecognitionInfo() }))
         } catch {
-            self.delegate?.recognitionResult(result: .failuer(.fetch))
+            self.delegate?.recognitionResult(result: .failure(.fetch))
         }
     }
     
@@ -84,7 +84,7 @@ class CoreDataManager {
             item.first?.detail = info.detail
             item.first?.date = info.date
         } catch {
-            self.delegate?.recognitionResult(result: .failuer(.update))
+            self.delegate?.recognitionResult(result: .failure(.update))
         }
         saveContext()
     }
@@ -97,7 +97,7 @@ class CoreDataManager {
                 context.delete(item)
             }
         } catch {
-            self.delegate?.recognitionResult(result: .failuer(.delete))
+            self.delegate?.recognitionResult(result: .failure(.delete))
         }
         saveContext()
     }

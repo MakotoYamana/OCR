@@ -82,7 +82,7 @@ extension OCRModel: CoreDataManagerDelegate {
         switch result {
         case .success(let response):
             self.recognitionsInfo = response
-        case .failuer(let errorType):
+        case .failure(let errorType):
             self.delegates.values.forEach { delegate in
                 delegate.showAlert(errorType: errorType)
             }
