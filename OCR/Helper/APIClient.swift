@@ -10,11 +10,9 @@ import Foundation
 
 class APIClient {
     
-    static func request(imageDataString: String, completionHandler: @escaping (Result<Data, Error>) -> ()) {
+    static func request(urlRequest: URLRequest, completionHandler: @escaping (Result<Data, Error>) -> ()) {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
-        
-        let urlRequest = URLRequester.create(jsonRequest: URLRequester.createJsonRequest(imageDataString: imageDataString))
         
         let task = session.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
             if let _ = response as? HTTPURLResponse {

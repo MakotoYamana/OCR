@@ -11,7 +11,9 @@ import SwiftyJSON
 class CloudVisionAPI {
     
     func requestAPI(imageDataString: String, completionHandler: @escaping (String) -> ()) {
-        APIClient.request(imageDataString: imageDataString) { result in
+        let urlRequest = URLRequester.create(jsonRequest: URLRequester.createJsonRequest(imageDataString: imageDataString))
+        
+        APIClient.request(urlRequest: urlRequest) { result in
             switch result {
             case .success(let data):
                 do {
