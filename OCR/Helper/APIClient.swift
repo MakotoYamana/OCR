@@ -8,22 +8,26 @@
 
 import Foundation
 
+enum Result {
+    case success(Data)
+    case failure(Error)
+    case other
+}
+
 class APIClient {
     
-    static func request(urlRequest: URLRequest, completionHandler: @escaping (Result<Data, Error>) -> ()) {
+    static func request(urlRequest: URLRequest, completionHandler: @escaping (Result) -> ()) {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         
         let task = session.dataTask(with: urlRequest) { (data: Data?, response: URLResponse?, error: Error?) in
-            if let _ = response as? HTTPURLResponse {
-                guard let data = data else {
-                    assert(false, "データ取得に失敗")
-                }
-                completionHandler(.success(data))
-            } else if let error = error {
+            switch (data, response, error) {
+            case (_, _, let error?):
                 completionHandler(.failure(error))
-            } else {
-                assert(false, "その他のエラー")
+            case (let data?, _, _):
+                completionHandler(.success(data))
+            default:
+                completionHandler(.other)
             }
             session.finishTasksAndInvalidate()
         }

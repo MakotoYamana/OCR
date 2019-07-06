@@ -25,6 +25,9 @@ class CloudVisionAPI {
                 }
             case .failure(let error):
                 completionHandler(error.localizedDescription)
+            case .other:
+                // FIXME: このケースでのエラーハンドリング
+                completionHandler("other")
             }
         }
     }

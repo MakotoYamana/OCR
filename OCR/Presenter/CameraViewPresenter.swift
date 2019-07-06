@@ -31,6 +31,8 @@ class CameraViewPresenter {
                     self.delegate?.showAlert(title: "文字認識に失敗しました", message: "再度お試しください。")
                 } else if result == "The Internet connection appears to be offline." {
                     self.delegate?.showAlert(title: "ネットワークエラーが発生しました", message: "オフラインを解除した上で、再度お試しください。")
+                } else if result == "other" {
+                    self.delegate?.showAlert(title: "予期しないエラーが発生しました", message: "再度お試しください。")
                 } else {
                     self.delegate?.prepare(result: result)
                 }
