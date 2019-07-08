@@ -8,7 +8,7 @@ end
 plugin 'cocoapods-keys', {
   :project => "OCR",
   :keys => [
-  "cloudVisionApiKey"
+  "cloudVisionAPIKey"
   ]
 }
 
